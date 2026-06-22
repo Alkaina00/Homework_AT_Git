@@ -4,6 +4,11 @@ public class Task {
     private String nameTask;
     private boolean statusTask;
 
+    public Task(String nameTask, boolean statusTask){
+        this.nameTask = nameTask;
+        this.statusTask = statusTask;
+    }
+
     public String getNameTask() {
         return nameTask;
     }
@@ -16,16 +21,14 @@ public class Task {
         return statusTask;
     }
 
-    public void setStatusTask() {
+    public void setStatusTask(boolean statusTask) {
         this.statusTask = statusTask;
     }
 
     @Override
     public String toString() {
-        String infoTask;
         if(getStatusTask())
-            infoTask = "[x] " + getNameTask();
-        else infoTask = "[ ] " + getNameTask();
-        return infoTask;
+            return "[x] " + getNameTask();
+        else return "[ ] " + getNameTask();
     }
 }
