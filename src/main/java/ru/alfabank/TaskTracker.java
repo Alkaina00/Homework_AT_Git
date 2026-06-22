@@ -3,17 +3,23 @@ package ru.alfabank;
 import java.util.ArrayList;
 
 public class TaskTracker {
-    private ArrayList<Task> listTask = new ArrayList<>();
+    private ArrayList<Task> listTask;
+
+    public TaskTracker(){
+        this.listTask = new ArrayList<>();
+    }
 
     public void addNewTask(Task task) {
         listTask.add(task);
+        System.out.println("Добавление задачи: " + task.getNameTask());
     }
 
     public void printAllTask() {
+        System.out.println("Вывод всех задач: ");
         for(Task task: listTask) {
             System.out.println(task);
-            System.out.println();
         }
+        System.out.println();
     }
 
     public int searchIndexTaskName(String nameTask) {
@@ -34,7 +40,15 @@ public class TaskTracker {
 
     public void doneTask(String nameTask)  {
         int index = searchIndexTaskName(nameTask);
-        listTask.get(index).setStatusTask(true);
+
+        if(index == -1)
+            System.out.println("Задача не найдена");
+        else {
+            listTask.get(index).setStatusTask(true);
+            System.out.println("Отметить задачу \"" + nameTask + "\" как выполненную: ");
+            searchTaskName(nameTask);
+        }
+
     }
 
     @Override
@@ -48,6 +62,7 @@ public class TaskTracker {
             else countOpenTask++;
         }
 
+        System.out.println("Вывод статистики по задачам: ");
         return "Всего задач: " + listTask.size() + "\n" +
                 "Выполнено: " + countDoneTask + "\n" +
                 "Открыто: " + countOpenTask;
